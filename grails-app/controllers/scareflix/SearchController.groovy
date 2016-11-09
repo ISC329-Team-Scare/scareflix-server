@@ -5,37 +5,67 @@ import groovy.json.*
 class SearchController {
 
     def index() {
-        def baseUrl = "http://localhost:8001/movies/"
-        def foundResults = false
-        def resultsList
+        def moviesUrl = "http://localhost:8001/movies/"
+        def genresUrl = "http://localhost:8001/genres/"
+        def curl = "curl -G "
+        def foundMovies = false
+        def foundGenres = false
+        def moviesList
+        def genresList
 
-        // Get the search term
-        def title = params.title
-        def actor = params.actor
+        // Get the search term and filters
+        def term = params.term
+        def type = params.type
+        def genre = params.genre
+        def rating = params.rating
 
-        // Perform the search
-        if (title != null || actor != null) {
-            def feedUrl
+        // Construct the search api url
+        def searchUrl = moviesUrl
+        if (type != "Actor") {
+            type = "Title"
+        }
+        if (genre == null) {
+            genre = "Any"
+        }
+        if (rating == null) {
+            rating = "Any"
+        }
+        searchUrl += "search/" + term + "/" + type + "/" + genre + "/" + rating
+        searchUrl = searchUrl.replaceAll(" ", "%20")
 
-            // Construct the API request URL.
-            if (title != null) {
-                feedUrl = baseUrl + "title/" + title
-            } else {
-                feedUrl = baseUrl + "actor/" + actor
-            }
+        // Run the search
+        def moviesCurl = curl + '' + searchUrl + ''
+        def moviesText = moviesCurl.execute().text
+        if (!moviesText.equals("")) {
+            moviesList = new JsonSlurper().parseText(moviesText)
 
-            // Run the query and process its results
-            def text = ("curl " + feedUrl).execute().text
-            if (!text.equals("")) {
-                resultsList = new JsonSlurper().parseText(text)
-
-                // Check if there were any results
-                if (resultsList.size() > 0) {
-                    foundResults = true
-                }
+            // Check if there were any results
+            if (moviesList.size() > 0) {
+                foundMovies = true
             }
         }
 
-        [foundResults:foundResults, resultsList:resultsList]
+        // Get all of the possible genres
+        def genreText = ("curl " + genresUrl).execute().text
+        if (!genreText.equals("")) {
+            genresList = new JsonSlurper().parseText(genreText)
+
+            // Check if there were any results
+            if (genresList.size() > 0) {
+                foundGenres = true
+            }
+        }
+
+
+        [
+          foundMovies:foundMovies
+        , moviesList:moviesList
+        , foundGenres:foundGenres
+        , genresList:genresList
+        , genre:genre
+        , type:type
+        , term:term
+        , rating:rating
+        ]
     }
 }

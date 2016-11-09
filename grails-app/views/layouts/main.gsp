@@ -16,6 +16,10 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <!-- Bootstrap Select CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap-select.min.css">
+
+    <!-- Custom CSS -->
     <!-- Custom CSS -->
     <link href="../assets/shop-item.css" rel="stylesheet">
 
@@ -55,7 +59,7 @@
                 <div class="col-sm-3 col-md-3 pull-right">
                     <form class="navbar-form" role="search" action="/search">
                         <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Search" name="title">
+                          <input type="text" class="form-control" placeholder="Search" name="term">
                           <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                           </div>
@@ -97,6 +101,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/bootstrap.js"></script>
+
+    <!-- Bootstrap Select JavaScript -->
+    <script src="/assets/bootstrap-select.min.js"></script>
 
 </body>
 
