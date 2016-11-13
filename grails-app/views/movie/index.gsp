@@ -24,6 +24,7 @@
                     <ul>
                         <li><b>Title:</b> ${movieInfo.movie_title}</li>
                         <li><b>Year:</b> ${movieInfo.movie_year}</li>
+                        <li><b>ID:</b> ${movieInfo.movie_id}</li>
                         <li><b>Rating:</b> ${movieInfo.movie_rating} / 10</li>
                         <li><b>Director:</b> ${movieInfo.movie_director}</li>
                         <g:if test="${foundActors}">
@@ -61,6 +62,14 @@
                             </li>
                         </g:if>
                     </ul>
+                    <div class="panel panel-default" style="margin-top:40px;">
+                        <div class="panel-heading">Options</div>
+                        <div class="panel-body">
+                            <a href="/related?id=${movieInfo.movie_id}" class="btn btn-primary"role="button">
+                                Add Related Movie 
+                            </a>
+                        </div>
+                    </div>
                 </g:if>
                 <g:else>
                     <div class="alert alert-danger" role="alert">
