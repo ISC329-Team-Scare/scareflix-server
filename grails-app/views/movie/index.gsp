@@ -68,6 +68,9 @@
                             <a href="/related?id=${movieInfo.movie_id}" class="btn btn-primary"role="button">
                                 Add Related Movie 
                             </a>
+                            <a href="/delete?id=${movieInfo.movie_id}" class="btn btn-danger"role="button">
+                                Delete Movie
+                            </a>
                         </div>
                     </div>
                 </g:if>
