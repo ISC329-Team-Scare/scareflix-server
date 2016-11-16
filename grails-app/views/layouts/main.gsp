@@ -55,6 +55,9 @@
                     <li>
                         <a href="/search">Search</a>
                     </li>
+                    <li>
+                        <a href="/add">Add Movie</a>
+                    </li>
                 </ul>
                 <div class="col-sm-3 col-md-3 pull-right">
                     <form class="navbar-form" role="search" action="/search">
